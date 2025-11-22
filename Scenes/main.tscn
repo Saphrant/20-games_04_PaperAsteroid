@@ -20,7 +20,8 @@ color = Color(0.737193, 0.7371929, 0.7371929, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_jjgbg")]
 z_index = 2
-position = Vector2(603, 564)
+position = Vector2(470.00006, 558)
+rotation = 1.5327202
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 0.5

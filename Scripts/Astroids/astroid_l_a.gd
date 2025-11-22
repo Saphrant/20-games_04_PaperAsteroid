@@ -8,6 +8,6 @@ func _ready():
 	queue_redraw() 
 
 func _draw():
-	var radius = 80.0 # Easy to change for Large/Medium/Small
+	var radius = 40.0 # Easy to change for Large/Medium/Small
 	# draw_arc(center, radius, start_angle, end_angle, point_count, color, width)
 	draw_arc(Vector2.ZERO, radius, 0, TAU, 32, Color.WHITE, 2.0)

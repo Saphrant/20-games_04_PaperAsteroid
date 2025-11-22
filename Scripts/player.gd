@@ -10,11 +10,9 @@ var friction := 0.75
 func _physics_process(delta):
 	var rotation_dir = Input.get_axis("left", "right")
 	rotation += rotation_dir * rotation_speed * delta
-	
+	var force = Vector2.UP.rotated(rotation) * thrust_power
 	# THRUST
 	if Input.is_action_pressed("thrust"):
-		# Vector pointing in the direction the ship is facing
-		var force = Vector2.UP.rotated(rotation) * thrust_power
 		velocity += force * delta
 		# Clam velocity by limit_length
 		velocity = velocity.limit_length(max_speed)
@@ -25,6 +23,7 @@ func _physics_process(delta):
 	# SHOOT
 	if Input.is_action_just_pressed("shoot"):
 		_shoot()
+		velocity += -force * delta
 		
 	move_and_slide()
 
@@ -32,6 +31,6 @@ func _shoot() -> void:
 	var bullet = bullet_scene.instantiate()
 	bullet.pos = global_position
 	bullet.rot = global_rotation
-	bullet.dir = rotation + (3*PI / 2)
+	bullet.dir = rotation + deg_to_rad(-90)
 	get_parent().add_child(bullet)
 	

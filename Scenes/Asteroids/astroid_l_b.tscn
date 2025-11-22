@@ -19,4 +19,4 @@ script = ExtResource("1_2u0cm")
 [node name="ScreenWrapComponent" parent="." instance=ExtResource("2_r4u3h")]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(0, -80, -70, 40, 70, 40)
+polygon = PackedVector2Array(0, -40, -35, 20, 30, 20)

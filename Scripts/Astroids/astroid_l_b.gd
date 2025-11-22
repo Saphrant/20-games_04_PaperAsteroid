@@ -9,10 +9,10 @@ func _ready():
 
 func _draw():
 	var points = PackedVector2Array([
-		Vector2(0, -80),   # Top point
-		Vector2(-70, 40),  # Bottom Left
-		Vector2(70, 40),   # Bottom Right
-		Vector2(0, -80)    # Top point again (to close the loop)
+		Vector2(0, -40),   # Top point
+		Vector2(-35, 20),  # Bottom Left
+		Vector2(30, 20),   # Bottom Right
+		Vector2(0, -40)    # Top point again (to close the loop)
 	])
 	# draw_polyline(points, color, width)
 	draw_polyline(points, Color.WHITE, 2.0)

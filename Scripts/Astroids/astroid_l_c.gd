@@ -2,7 +2,7 @@
 extends RigidBody2D
 
 var asteroid_tier:= 3
-@export var size:= 80.0
+@export var size:= 40.0
 
 
 func _ready():
