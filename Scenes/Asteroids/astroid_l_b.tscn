@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwmy03gm2uikj"]
+
+[ext_resource type="Script" uid="uid://cea5fwodi11ru" path="res://Scripts/Astroids/astroid_l_b.gd" id="1_2u0cm"]
+[ext_resource type="PackedScene" uid="uid://dejvx43k5dnqm" path="res://Scenes/Components/screen_wrap_component.tscn" id="2_r4u3h"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0tf0v"]
+friction = 0.0
+bounce = 1.0
+
+[node name="Asteroid_L_b" type="RigidBody2D" groups=["large_asteroid"]]
+collision_layer = 4
+collision_mask = 6
+physics_material_override = SubResource("PhysicsMaterial_0tf0v")
+gravity_scale = 0.0
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("1_2u0cm")
+
+[node name="ScreenWrapComponent" parent="." instance=ExtResource("2_r4u3h")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -80, -70, 40, 70, 40)

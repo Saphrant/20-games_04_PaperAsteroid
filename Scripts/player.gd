@@ -1,0 +1,37 @@
+extends CharacterBody2D
+
+@export var bullet_scene: PackedScene
+
+var rotation_speed := 5.0
+var thrust_power := 500.0
+var max_speed := 500.0
+var friction := 0.75
+
+func _physics_process(delta):
+	var rotation_dir = Input.get_axis("left", "right")
+	rotation += rotation_dir * rotation_speed * delta
+	
+	# THRUST
+	if Input.is_action_pressed("thrust"):
+		# Vector pointing in the direction the ship is facing
+		var force = Vector2.UP.rotated(rotation) * thrust_power
+		velocity += force * delta
+		# Clam velocity by limit_length
+		velocity = velocity.limit_length(max_speed)
+	
+	# FRICTION
+	if not Input.is_action_pressed("thrust"):
+		velocity = velocity.move_toward(Vector2.ZERO, friction)
+	# SHOOT
+	if Input.is_action_just_pressed("shoot"):
+		_shoot()
+		
+	move_and_slide()
+
+func _shoot() -> void:
+	var bullet = bullet_scene.instantiate()
+	bullet.pos = global_position
+	bullet.rot = global_rotation
+	bullet.dir = rotation + (3*PI / 2)
+	get_parent().add_child(bullet)
+	

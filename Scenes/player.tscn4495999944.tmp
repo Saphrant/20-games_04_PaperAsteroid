@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://fg676b1vijte"]
+
+[ext_resource type="Script" uid="uid://888o6i1dywhg" path="res://Scripts/player.gd" id="1_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://b6wrj5i2jcmm7" path="res://Assets/PenTool.png" id="1_v0iea"]
+[ext_resource type="PackedScene" uid="uid://dejvx43k5dnqm" path="res://Scenes/Components/screen_wrap_component.tscn" id="3_6t5aa"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_cvnsp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_v0iea")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-2, -29, -24, 9, -7, 28, 7, 28, 24, 9, 2, -29)
+
+[node name="ScreenWrapComponent" parent="." instance=ExtResource("3_6t5aa")]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2dkijjo6gcju"]
+
+[ext_resource type="Script" uid="uid://cqs1k78pj0eka" path="res://Scripts/main.gd" id="1_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://fg676b1vijte" path="res://Scenes/player.tscn" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://csd71d5t7fx8k" path="res://Scenes/asteroids.tscn" id="2_8gbba"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_bo1nx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.737193, 0.7371929, 0.7371929, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_jjgbg")]
+z_index = 2
+position = Vector2(603, 564)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Astroids" parent="." instance=ExtResource("2_8gbba")]
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
