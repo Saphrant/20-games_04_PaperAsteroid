@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://3b4sa7ykxmw8"]
+[gd_scene load_steps=6 format=3 uid="uid://3b4sa7ykxmw8"]
 
-[ext_resource type="Script" uid="uid://clonv13ym582g" path="res://Scripts/Astroids/astroid_l_a.gd" id="1_0tf0v"]
+[ext_resource type="Script" uid="uid://c0oeg6ye5q8s2" path="res://Scripts/Astroids/asteroid.gd" id="1_3gt40"]
 [ext_resource type="PackedScene" uid="uid://dejvx43k5dnqm" path="res://Scenes/Components/screen_wrap_component.tscn" id="2_3gt40"]
+[ext_resource type="PackedScene" uid="uid://pwx3aj5w2fns" path="res://Scenes/Asteroids/astroid_m_a.tscn" id="2_8kftn"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0tf0v"]
 friction = 0.0
@@ -10,14 +11,16 @@ bounce = 1.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_0tf0v"]
 radius = 40.0
 
-[node name="Asteroid_L_A" type="RigidBody2D" groups=["large_asteroid"]]
+[node name="AsteroidLA" type="RigidBody2D" groups=["circle", "large_asteroid"]]
 collision_layer = 4
 collision_mask = 6
 physics_material_override = SubResource("PhysicsMaterial_0tf0v")
 gravity_scale = 0.0
 linear_damp_mode = 1
 angular_damp_mode = 1
-script = ExtResource("1_0tf0v")
+script = ExtResource("1_3gt40")
+radius = 40.0
+next_tier_scene = ExtResource("2_8kftn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_0tf0v")

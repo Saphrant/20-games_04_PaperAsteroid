@@ -18,3 +18,7 @@ texture = ExtResource("1_v0iea")
 polygon = PackedVector2Array(-2, -28, -24, 8, -7, 28, 7, 28, 24, 8, 2, -28)
 
 [node name="ScreenWrapComponent" parent="." instance=ExtResource("3_6t5aa")]
+
+[node name="ReloadTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true

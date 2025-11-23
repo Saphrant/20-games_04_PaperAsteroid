@@ -24,10 +24,5 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("large_asteroid"):
-		GameManager.on_large_hit(body, body.global_position)
-	elif body.is_in_group("medium_asteroid"):
-		GameManager.on_medium_hit(body.global_position)
-	elif body.is_in_group("small_asteroid"):
-		GameManager.on_small_hit(body.global_position)
+	GameManager.on_asteroid_hit(body)
 	queue_free()

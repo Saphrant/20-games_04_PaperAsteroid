@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@onready var reload_timer: Timer = $ReloadTimer
+
 @export var bullet_scene: PackedScene
 
 var rotation_speed := 5.0
@@ -21,9 +23,9 @@ func _physics_process(delta):
 	if not Input.is_action_pressed("thrust"):
 		velocity = velocity.move_toward(Vector2.ZERO, friction)
 	# SHOOT
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_pressed("shoot") and reload_timer.time_left <= 0:
+		reload_timer.start()
 		_shoot()
-		velocity += -force * delta
 		
 	move_and_slide()
 
