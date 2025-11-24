@@ -2,6 +2,7 @@ extends Node
 
 # --- Asteroid hits
 signal asteroid_hit
+signal picked_up
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,5 +14,7 @@ func _process(delta: float) -> void:
 	pass
 
 func on_asteroid_hit(body):
-	body.explode()
-	asteroid_hit.emit()
+	asteroid_hit.emit(body)
+
+func on_pickup(value, item):
+	picked_up.emit(value, item)

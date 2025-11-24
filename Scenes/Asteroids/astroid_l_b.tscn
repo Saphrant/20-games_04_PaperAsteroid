@@ -1,26 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwmy03gm2uikj"]
+[gd_scene load_steps=8 format=3 uid="uid://dwmy03gm2uikj"]
 
 [ext_resource type="Script" uid="uid://c0oeg6ye5q8s2" path="res://Scripts/Astroids/asteroid.gd" id="1_r4u3h"]
-[ext_resource type="PackedScene" uid="uid://c1e7nx20exoxr" path="res://Scenes/Asteroids/astroid_m_b.tscn" id="2_gj0rw"]
+[ext_resource type="Texture2D" uid="uid://dwxa3rhinv08b" path="res://Assets/asteroids/asteroid_pyramid1.tres" id="2_j4h6w"]
 [ext_resource type="PackedScene" uid="uid://dejvx43k5dnqm" path="res://Scenes/Components/screen_wrap_component.tscn" id="2_r4u3h"]
+[ext_resource type="Texture2D" uid="uid://dlof6nexf6n72" path="res://Assets/asteroids/asteroid_pyramid2.tres" id="3_6j34i"]
+[ext_resource type="Texture2D" uid="uid://chhbggybmtndh" path="res://Assets/asteroids/asteroid_pyramid3.tres" id="4_kuk01"]
+[ext_resource type="Texture2D" uid="uid://dm2ak650v26vx" path="res://Assets/asteroids/asteroid_pyramid4.tres" id="5_g3jf2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0tf0v"]
 friction = 0.0
 bounce = 1.0
 
-[node name="AsteroidLB" type="RigidBody2D" groups=["large_asteroid", "triangle"]]
+[node name="AsteroidLB" type="RigidBody2D" groups=["asteroid"]]
 collision_layer = 4
-collision_mask = 6
+collision_mask = 38
 physics_material_override = SubResource("PhysicsMaterial_0tf0v")
 gravity_scale = 0.0
 linear_damp_mode = 1
 angular_damp_mode = 1
 script = ExtResource("1_r4u3h")
-shape_type = 0
-radius = 40.0
-next_tier_scene = ExtResource("2_gj0rw")
+asteroid_array = Array[AtlasTexture]([ExtResource("2_j4h6w"), ExtResource("3_6j34i"), ExtResource("4_kuk01"), ExtResource("5_g3jf2")])
+asteroid_tier = null
 
 [node name="ScreenWrapComponent" parent="." instance=ExtResource("2_r4u3h")]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(0, -42, -25, 41, 25, 41)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." groups=["asteroid"]]
+polygon = PackedVector2Array(0, -50, -50, 45, 50, 45)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_j4h6w")

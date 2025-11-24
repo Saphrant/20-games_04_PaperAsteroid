@@ -2,7 +2,8 @@ class_name ScreenWrapComponent
 extends Node
 
 # Screen margin
-@export var margin: float = 20.0
+var margin: float = 10.0
+var top_margin: float = 100.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -17,6 +18,6 @@ func _process(_delta: float) -> void:
 	
 	# Y axis
 	if parent.global_position.y > screen_size.y + margin:
-		parent.global_position.y = -margin
-	elif parent.global_position.y < -margin:
+		parent.global_position.y = -margin + top_margin
+	elif parent.global_position.y < -margin + top_margin:
 		parent.global_position.y = screen_size.y + margin

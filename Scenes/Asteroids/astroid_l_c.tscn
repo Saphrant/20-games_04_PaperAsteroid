@@ -1,29 +1,35 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdiincvgrma76"]
+[gd_scene load_steps=9 format=3 uid="uid://bdiincvgrma76"]
 
 [ext_resource type="Script" uid="uid://c0oeg6ye5q8s2" path="res://Scripts/Astroids/asteroid.gd" id="1_vb3da"]
 [ext_resource type="PackedScene" uid="uid://dejvx43k5dnqm" path="res://Scenes/Components/screen_wrap_component.tscn" id="2_bg1t0"]
-[ext_resource type="PackedScene" uid="uid://bktigs3twc1ul" path="res://Scenes/Asteroids/astroid_m_c.tscn" id="2_kk0tc"]
+[ext_resource type="Texture2D" uid="uid://b881qghyhdec5" path="res://Assets/asteroids/asteroid_circ1.tres" id="3_bg1t0"]
+[ext_resource type="Texture2D" uid="uid://d3argsj84cttb" path="res://Assets/asteroids/asteroid_circ2.tres" id="3_rxg0t"]
+[ext_resource type="Texture2D" uid="uid://e3sknnm5dv55" path="res://Assets/asteroids/asteroid_circ3.tres" id="4_k0xcu"]
+[ext_resource type="Texture2D" uid="uid://cjtaydxqjw5uc" path="res://Assets/asteroids/asteroid_circ4.tres" id="5_hqvv1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0tf0v"]
 friction = 0.0
 bounce = 1.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ah40k"]
-size = Vector2(80, 80)
+[sub_resource type="CircleShape2D" id="CircleShape2D_kk0tc"]
+radius = 40.0
 
-[node name="AsteroidLC" type="RigidBody2D" groups=["large_asteroid", "square"]]
+[node name="AsteroidLC" type="RigidBody2D" groups=["asteroid"]]
 collision_layer = 4
-collision_mask = 6
+collision_mask = 38
 physics_material_override = SubResource("PhysicsMaterial_0tf0v")
 gravity_scale = 0.0
 linear_damp_mode = 1
 angular_damp_mode = 1
 script = ExtResource("1_vb3da")
-shape_type = 1
-radius = 40.0
-next_tier_scene = ExtResource("2_kk0tc")
+asteroid_array = Array[AtlasTexture]([ExtResource("3_bg1t0"), ExtResource("3_rxg0t"), ExtResource("4_k0xcu"), ExtResource("5_hqvv1")])
+asteroid_tier = null
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["large_asteroid", "square"]]
-shape = SubResource("RectangleShape2D_ah40k")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kk0tc")
 
 [node name="ScreenWrapComponent" parent="." instance=ExtResource("2_bg1t0")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_bg1t0")

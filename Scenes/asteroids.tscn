@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://csd71d5t7fx8k"]
+[gd_scene load_steps=7 format=3 uid="uid://csd71d5t7fx8k"]
 
 [ext_resource type="Script" uid="uid://lak7n7a48n5j" path="res://Scripts/asteroids.gd" id="1_ybrt5"]
 [ext_resource type="PackedScene" uid="uid://3b4sa7ykxmw8" path="res://Scenes/Asteroids/astroid_l_a.tscn" id="2_072wl"]
 [ext_resource type="PackedScene" uid="uid://dwmy03gm2uikj" path="res://Scenes/Asteroids/astroid_l_b.tscn" id="3_lrtgj"]
 [ext_resource type="PackedScene" uid="uid://bdiincvgrma76" path="res://Scenes/Asteroids/astroid_l_c.tscn" id="4_lrtgj"]
+[ext_resource type="PackedScene" uid="uid://b1b408id88q25" path="res://Scenes/ink_bottle.tscn" id="5_wihiu"]
 
 [sub_resource type="Curve2D" id="Curve2D_ybrt5"]
 _data = {
@@ -14,6 +15,7 @@ point_count = 5
 [node name="Astreoids" type="Node2D"]
 script = ExtResource("1_ybrt5")
 large_asteroid_scene = Array[PackedScene]([ExtResource("2_072wl"), ExtResource("3_lrtgj"), ExtResource("4_lrtgj")])
+ink_bottle_scene = ExtResource("5_wihiu")
 
 [node name="SpawnTimer" type="Timer" parent="."]
 
@@ -22,4 +24,11 @@ curve = SubResource("Curve2D_ybrt5")
 
 [node name="SpawnLocation" type="PathFollow2D" parent="SpawnPath"]
 
+[node name="PickUpTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="InkBottles" type="Node" parent="."]
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="PickUpTimer" to="." method="_on_pick_up_timer_timeout"]

@@ -1,20 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://bu43cchdie6k0"]
+[gd_scene load_steps=7 format=3 uid="uid://bu43cchdie6k0"]
 
 [ext_resource type="Script" uid="uid://ih7f556w53e2" path="res://Scripts/bullet.gd" id="1_xjght"]
+[ext_resource type="Texture2D" uid="uid://cwgxa7vpofbak" path="res://Assets/bullets/bullet1.tres" id="2_odot3"]
+[ext_resource type="Texture2D" uid="uid://dwcl56bjyg6bq" path="res://Assets/bullets/bullet2.tres" id="3_t8o6v"]
+[ext_resource type="Texture2D" uid="uid://bnwctpn36kg5u" path="res://Assets/bullets/bullet3.tres" id="4_qttmj"]
+[ext_resource type="Texture2D" uid="uid://bfij1jrs0jam0" path="res://Assets/bullets/bullet4.tres" id="5_tkcvl"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xjght"]
-radius = 5.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_odot3"]
+size = Vector2(12, 17)
 
 [node name="Bullet" type="Area2D"]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_xjght")
 radius = 5.0
+bullets = Array[AtlasTexture]([ExtResource("2_odot3"), ExtResource("3_t8o6v"), ExtResource("4_qttmj"), ExtResource("5_tkcvl")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_xjght")
+shape = SubResource("RectangleShape2D_odot3")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_odot3")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

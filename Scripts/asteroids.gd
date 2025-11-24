@@ -2,40 +2,28 @@ extends Node2D
 
 @onready var spawn_timer: Timer = $SpawnTimer
 @onready var spawn_location: PathFollow2D = $SpawnPath/SpawnLocation
+@onready var pick_up_timer: Timer = $PickUpTimer
+@onready var ink_bottles: Node = $InkBottles
 
 @export var large_asteroid_scene: Array[PackedScene]
-@export var medium_asteroid_scene: Array[PackedScene]
-@export var small_asteroid_scene: Array[PackedScene]
+@export var ink_bottle_scene: PackedScene
 
 var number_of_asteroids: int
+var screen_size: Vector2
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	screen_size = get_viewport_rect().size
 	spawn_timer.start()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 	
 func _on_spawn_timer_timeout() -> void:
-	if large_asteroid_scene.size() > 0:
-		spawn_asteroids(large_asteroid_scene)
-  
-func _on_large_hit(pos) -> void:
-	number_of_asteroids -= 1
-	spawn_asteroids(medium_asteroid_scene)
-	
-func _on_medium_hit(pos) -> void:
-	pass
-	
-func _on_small_hit(pos) -> void:
-	pass
+	if large_asteroid_scene.size() > 0 and number_of_asteroids < 6:
+		spawn_large_asteroids()
 
-func spawn_asteroids(asteroid_array) -> void:
+func spawn_large_asteroids() -> void:
 		# Create a new instance of the Asteroid scene.
-		if asteroid_array == large_asteroid_scene:
-			asteroid_array = large_asteroid_scene.pick_random()
+			var asteroid_array = large_asteroid_scene.pick_random()
 			var asteroid = asteroid_array.instantiate() as RigidBody2D
 			
 			# Choose a random location on Path2D.
@@ -57,3 +45,21 @@ func spawn_asteroids(asteroid_array) -> void:
 			
 			add_child(asteroid)
 			number_of_asteroids += 1
+
+
+func spawn_ink_bottle() -> void:
+	var ink_bottle = ink_bottle_scene.instantiate() as Area2D
+	var random_location_x = randf_range(0, screen_size.x - 40)
+	var random_location_y = randf_range(120, screen_size.y - 40)
+	ink_bottle.position.x = random_location_x
+	ink_bottle.position.y = random_location_y
+	ink_bottles.add_child(ink_bottle)
+	
+
+
+func _on_pick_up_timer_timeout() -> void:
+	var remaining_ink_bottles := ink_bottles.get_children()
+	var rng = randf()
+	if rng < 0.4 and remaining_ink_bottles.size() < 2:
+		spawn_ink_bottle()
+		
